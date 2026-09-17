@@ -1,0 +1,31 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getPublishedPosts } from '../../lib/posts';
+
+const posts = await getPublishedPosts();
+
+const tagCount = new Map<string, number>();
+for (const post of posts) {
+  for (const tag of post.data.tags) {
+    tagCount.set(tag, (tagCount.get(tag) ?? 0) + 1);
+  }
+}
+const tags = [...tagCount.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'zh-CN'));
+---
+
+<Base title="标签" description="按标签浏览文章">
+  <h1>标签</h1>
+  {
+    tags.length === 0 ? (
+      <p class="empty-state">还没有标签。</p>
+    ) : (
+      <p class="tag-cloud">
+        {tags.map(([tag, count]) => (
+          <a class="tag" href={`/tags/${encodeURIComponent(tag)}/`}>
+            {tag}（{count}）
+          </a>
+        ))}
+      </p>
+    )
+  }
+</Base>

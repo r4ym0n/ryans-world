@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../config';
+---
+
+<Base title="关于" description={`关于${site.author}与这座博客`}>
+  <article class="about">
+    <h1>关于</h1>
+    <p>
+      我是 {site.author}。这里写投资、区块链、能源，以及一些需要放很久才看得清的问题。
+    </p>
+    <p>
+      写作在 Obsidian 里完成。进 <code>posts/</code> 的 Markdown 才会出现在这个站点上；vault
+      里其余笔记都是私有的。
+    </p>
+    <p>
+      站点用 Astro 静态生成，托管在 Vercel。想订阅的话走
+      <a href="/rss.xml">RSS</a>。
+    </p>
+  </article>
+</Base>

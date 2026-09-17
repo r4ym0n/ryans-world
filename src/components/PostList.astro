@@ -1,0 +1,65 @@
+---
+import { formatDate, postHref, type BlogPost } from '../lib/posts';
+
+interface Props {
+  posts: BlogPost[];
+  groupByYear?: boolean;
+  showDescription?: boolean;
+}
+
+const { posts, groupByYear = false, showDescription = false } = Astro.props;
+
+const byYear = new Map<number, BlogPost[]>();
+for (const post of posts) {
+  const year = post.data.date.getUTCFullYear();
+  if (!byYear.has(year)) byYear.set(year, []);
+  byYear.get(year)!.push(post);
+}
+const years = [...byYear.keys()].sort((a, b) => b - a);
+---
+
+{
+  posts.length === 0 && <p class="empty-state">还没有文章。</p>
+}
+
+{
+  groupByYear &&
+    years.map((year) => (
+      <section>
+        <h2 class="year-heading">{year}</h2>
+        <ul class="post-list">
+          {byYear.get(year)!.map((post) => (
+            <li>
+              <span class="post-date">{formatDate(post.data.date)}</span>
+              <p class="post-title">
+                <a href={postHref(post)}>{post.data.title}</a>
+                {post.data.draft && <span class="tag">草稿</span>}
+              </p>
+              {showDescription && post.data.description && (
+                <p class="post-desc">{post.data.description}</p>
+              )}
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+}
+
+{
+  !groupByYear && posts.length > 0 && (
+    <ul class="post-list">
+      {posts.map((post) => (
+        <li>
+          <span class="post-date">{formatDate(post.data.date)}</span>
+          <p class="post-title">
+            <a href={postHref(post)}>{post.data.title}</a>
+            {post.data.draft && <span class="tag">草稿</span>}
+          </p>
+          {showDescription && post.data.description && (
+            <p class="post-desc">{post.data.description}</p>
+          )}
+        </li>
+      ))}
+    </ul>
+  )
+}

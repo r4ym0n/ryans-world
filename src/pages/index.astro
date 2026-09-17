@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro';
+import PostList from '../components/PostList.astro';
+import { site } from '../config';
+import { getVisiblePosts } from '../lib/posts';
+
+const posts = await getVisiblePosts();
+---
+
+<Base>
+  <section class="intro">
+    <p class="intro-lead">{site.description}</p>
+  </section>
+  <PostList posts={posts} groupByYear showDescription />
+</Base>
