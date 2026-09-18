@@ -1,21 +1,19 @@
 ---
 import Base from '../layouts/Base.astro';
-import { site } from '../config';
 ---
 
-<Base title="关于" description={`关于${site.author}与这座博客`} indexable>
+<Base title="关于" description="写代码的人，用随笔处理没想完的事。" indexable>
   <article class="about" data-pagefind-body>
     <h1 data-pagefind-meta="title">关于</h1>
+    <p>我写代码。没想完的事，就丢进随笔里。</p>
     <p>
-      我是 {site.author}。这里写投资、区块链、能源，以及一些需要放很久才看得清的问题。
+      投资、链、能源会进来。还有一些要放很久才看得清的问题。不是课程，也不是帮你规划人生。<strong>读者首先是以后的自己。</strong>
     </p>
     <p>
-      写作在 Obsidian 里完成。进 <code>posts/</code> 的 Markdown 才会出现在这个站点上；vault
-      里其余笔记都是私有的。
+      写作在 Obsidian。vault 里大部分不会上网。进 <code>posts/</code> 的，才见光。这个壳换过几次，图的是打开就能写，写完不用养。
     </p>
     <p>
-      站点用 Astro 静态生成，托管在 Vercel。想订阅的话走
-      <a href="/rss.xml">RSS</a>。
+      想订阅走 <a href="/rss.xml">RSS</a>。
     </p>
   </article>
 </Base>
