@@ -25,3 +25,8 @@ pnpm-debug.log*
 
 # Vercel
 .vercel/
+
+# Obsidian workspace (machine-specific)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache/

@@ -1,0 +1,15 @@
+{
+  "legacyEditor": false,
+  "livePreview": true,
+  "defaultViewMode": "source",
+  "attachmentFolderPath": "posts",
+  "userIgnoreFilters": [
+    "node_modules/",
+    "dist/",
+    ".git/",
+    ".astro/",
+    ".vercel/",
+    ".vscode/",
+    "package-lock.json"
+  ]
+}
