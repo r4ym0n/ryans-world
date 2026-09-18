@@ -1,22 +1,26 @@
 ---
-import { site } from '../config';
+import Search from '../components/Search.astro';
+import { site, themeMeta } from '../config';
 import '../styles/global.css';
 
 interface Props {
   title?: string;
   description?: string;
+  /** 是否写入 Pagefind 索引。文章页和关于页才开。 */
+  indexable?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, indexable = false } = Astro.props;
 const pageTitle = title ? `${title} · ${site.title}` : site.title;
 const pageDesc = description ?? site.description;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogType = title ? 'article' : 'website';
 const currentPath = Astro.url.pathname;
+const theme = themeMeta[site.theme];
 ---
 
 <!doctype html>
-<html lang={site.lang}>
+<html lang={site.lang} data-theme={site.theme}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -33,12 +37,21 @@ const currentPath = Astro.url.pathname;
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={pageDesc} />
-    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#17181c" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content={theme.colorLight} media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content={theme.colorDark} media="(prefers-color-scheme: dark)" />
+    {
+      theme.webfont && (
+        <>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+          <link href={theme.webfont} rel="stylesheet" />
+        </>
+      )
+    }
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="alternate" type="application/rss+xml" title={site.title} href="/rss.xml" />
   </head>
-  <body>
+  <body data-pagefind-ignore={indexable ? undefined : 'all'}>
     <header class="site-header">
       <a class="site-title" href="/">{site.title}</a>
       <nav class="site-nav">
@@ -49,6 +62,7 @@ const currentPath = Astro.url.pathname;
             </a>
           ))
         }
+        <Search />
       </nav>
     </header>
     <main>
@@ -57,5 +71,6 @@ const currentPath = Astro.url.pathname;
     <footer class="site-footer">
       © {new Date().getFullYear()} {site.author} · 用 <a href="https://astro.build">Astro</a> 构建
     </footer>
+    <Search mode="layer" />
   </body>
 </html>

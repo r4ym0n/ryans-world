@@ -30,3 +30,6 @@ pnpm-debug.log*
 .obsidian/workspace.json
 .obsidian/workspace-mobile.json
 .obsidian/cache/
+content/.obsidian/workspace.json
+content/.obsidian/workspace-mobile.json
+content/.obsidian/cache/

@@ -2,23 +2,29 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 
 export type BlogPost = CollectionEntry<'blog'>;
 
+/** 在 drafts/ 下，或 frontmatter 写了 draft: true */
+export function isDraft(post: BlogPost): boolean {
+  return post.data.draft === true || /(^|\/)drafts\//.test(post.id);
+}
+
 /** 生产环境隐藏草稿；本地 dev 仍显示，方便在 Obsidian 里预览半成品 */
 export async function getVisiblePosts(): Promise<BlogPost[]> {
-  const posts = await getCollection('blog', ({ data }) =>
-    import.meta.env.PROD ? data.draft !== true : true
+  const posts = await getCollection('blog', (post) =>
+    import.meta.env.PROD ? !isDraft(post) : true
   );
   return posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 }
 
 export async function getPublishedPosts(): Promise<BlogPost[]> {
-  const posts = await getCollection('blog', ({ data }) => data.draft !== true);
+  const posts = await getCollection('blog', (post) => !isDraft(post));
   return posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 }
 
 /** 文件名 YYYY-MM-DD-slug.md → slug；frontmatter.slug 可覆盖 */
 export function postSlug(post: BlogPost): string {
   if (post.data.slug) return post.data.slug;
-  return post.id.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/\.mdx?$/, '');
+  const filename = post.id.split('/').pop() ?? post.id;
+  return filename.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/\.mdx?$/, '');
 }
 
 export function postHref(post: BlogPost): string {

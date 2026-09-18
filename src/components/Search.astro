@@ -1,0 +1,22 @@
+---
+import PagefindConfig from 'astro-pagefind/components/PagefindConfig.astro';
+
+interface Props {
+  mode?: 'trigger' | 'layer';
+}
+
+const { mode = 'trigger' } = Astro.props;
+---
+
+{
+  mode === 'trigger' ? (
+    <div class="site-search">
+      <pagefind-modal-trigger placeholder="搜索"></pagefind-modal-trigger>
+    </div>
+  ) : (
+    <>
+      <PagefindConfig />
+      <pagefind-modal reset-on-close></pagefind-modal>
+    </>
+  )
+}

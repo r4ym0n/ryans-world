@@ -8,15 +8,22 @@ astro dev --background
 
 Manage the background server with `astro dev stop`, `astro dev status`, and `astro dev logs`.
 
+## Writing agent
+
+This repo is the hand and mouth. The brain is the iCloud Obsidian vault.
+
+- Read knowledge with Obsidian CLI against the main vault, never copy the vault into git:
+
+```
+obsidian vault="Obsidian Vault" search query="..."
+obsidian vault="Obsidian Vault" read path="..."
+```
+
+- Craft lives in `content/Writing-Studio/` (style, prompts, research). Start from `content/Writing-Studio/README.md`.
+- Publishable writing lives in `content/posts/` as `YYYY-MM-DD-slug.md`. Astro only builds that folder. Studio drafts are not pages.
+- After adding or moving posts, run `npm run lint`.
+- Open `content/` as the Obsidian writing vault, not the whole repo.
+
 ## Documentation
 
 Full documentation: https://docs.astro.build
-
-Consult these guides before working on related tasks:
-
-- [Adding pages, dynamic routes, or middleware](https://docs.astro.build/en/guides/routing/)
-- [Working with Astro components](https://docs.astro.build/en/basics/astro-components/)
-- [Using React, Vue, Svelte, or other framework components](https://docs.astro.build/en/guides/framework-components/)
-- [Adding or managing content](https://docs.astro.build/en/guides/content-collections/)
-- [Adding styles or using Tailwind](https://docs.astro.build/en/guides/styling/)
-- [Supporting multiple languages](https://docs.astro.build/en/guides/internationalization/)

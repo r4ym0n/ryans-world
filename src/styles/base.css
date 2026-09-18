@@ -1,0 +1,78 @@
+/* 所有主题共用的骨架；外观在 themes/ */
+* { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0 auto;
+  max-width: var(--max-width, 44rem);
+  padding: 0 1.25rem 4rem;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-size: 1.05rem;
+  line-height: 1.85;
+}
+
+.post-body {
+  font-family: var(--font-body);
+}
+
+.post-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+html {
+  --pf-font: var(--font-ui);
+  --pf-text: var(--text);
+  --pf-text-secondary: var(--text-muted);
+  --pf-text-muted: var(--text-muted);
+  --pf-background: var(--bg);
+  --pf-border: var(--border, var(--line, currentColor));
+  --pf-border-focus: var(--accent);
+  --pf-hover: var(--bg-subtle, var(--paper, var(--bg)));
+  --pf-outline-focus: var(--accent);
+  --pf-mark: var(--accent);
+  --pf-modal-max-width: 36rem;
+  --pf-modal-max-height: min(70vh, 32rem);
+}
+
+.site-search {
+  display: inline-flex;
+  align-items: center;
+}
+
+.site-search pagefind-modal-trigger {
+  width: auto;
+}
+
+html :is(*, #\#):is(*, #\#):is(*, #\#) .site-search .pf-trigger-btn {
+  width: auto;
+  min-width: 0;
+  height: 1.85rem;
+  padding: 0 0.65rem;
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+}
+
+@media (max-width: 520px) {
+  html :is(*, #\#):is(*, #\#):is(*, #\#) .site-search .pf-trigger-text,
+  html :is(*, #\#):is(*, #\#):is(*, #\#) .site-search .pf-trigger-shortcut {
+    display: none;
+  }
+
+  html :is(*, #\#):is(*, #\#):is(*, #\#) .site-search .pf-trigger-btn {
+    width: 1.85rem;
+    padding: 0;
+    justify-content: center;
+  }
+}
