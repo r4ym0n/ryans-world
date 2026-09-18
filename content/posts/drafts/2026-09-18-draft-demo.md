@@ -10,4 +10,4 @@ tags: [示例]
 - **不会**出现在线上
 - **会**出现在本地 `npm run dev` 的预览中（标题旁有「草稿」标记）
 
-写完后把文件移出 `drafts/`，再 `vercel --prod` 即为发布。也可以继续用 frontmatter 里的 `draft: true`。
+写完后把文件移出 `drafts/`，再 `git push origin main` 即为发布。也可以继续用 frontmatter 里的 `draft: true`。

@@ -28,7 +28,7 @@ content/
 src/                站点代码，不要当 vault
 ```
 
-GitHub：`r4ym0n/ryans-world`。发布：`vercel --prod`。
+GitHub：`r4ym0n/ryans-world`。发布：`git push origin main`，Vercel 自动构建生产环境。
 
 主库里的 `10-Projects/Writing-Studio` 已拷到这里，确认无误后可以删掉主库那份，避免两套工具间。主库里的 `95-Blog`、`10-Projects/Blog` 是旧站点残件，不要再写。
 
